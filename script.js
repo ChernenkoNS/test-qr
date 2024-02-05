@@ -42,6 +42,8 @@ addBtn.addEventListener("click", () => {
  
     // product = JSON.parse(data)
     addProductCard(product)
+    article.value = " "
+
   }
 
 
