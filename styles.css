@@ -1,0 +1,39 @@
+
+.container{
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.product{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+
+}
+
+.product-card > span {
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+
+}
+
+.product-card{
+    padding: 20px;
+    border: 1px solid black;
+    position: relative;
+}
+
+.submit-btn{
+    margin-top: 40px;
+    padding: 10px 60px;
+}
