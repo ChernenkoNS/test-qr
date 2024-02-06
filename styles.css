@@ -12,6 +12,7 @@
 }
 
 .product-card > span {
+    cursor: pointer;
     display: block;
     display: flex;
     align-items: center;
@@ -31,6 +32,7 @@
     padding: 20px;
     border: 1px solid black;
     position: relative;
+    list-style-type: none;
 }
 
 .submit-btn{

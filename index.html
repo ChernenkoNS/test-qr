@@ -15,35 +15,41 @@
             <input class="article-input" type="text" value="xx-xx-xx-xx">
         </div>
 
-        <button class="submit-btn">Отправить</button>
+        <button class="submit-btn">Ок</button>
 
 
 
 
         <h3 class="product-title">Список товаров</h3>
-        <div class="product">
+        <ul class="product">
 
-            <div class="product-card">
-                <span>X</span>
+            <li class="product-card" id="test-1">
+                <span class="removeBtn"  id="test-1">X</span>
                 <h5>Карточка товара #1</h5>
                 <img src="images/images.png" alt="img">
                 <p>артик: ххх-ххх-хх</p>
                 <div>
                     <span>количество</span>
-                    <input type="text">
+                    <input type="number" min="1" max="99" value="1">
                 </div>
-            </div>
-            <div class="product-card">
-                <span>X</span>
+            </li>
+            <li class="product-card"  id="test-2">
+                <span class="removeBtn"  id="test-2">X</span>
                 <h5>Карточка товара #2</h5>
                 <img src="images/images.png" alt="img">
                 <p>артик: ххх-ххх-хх</p>
                 <div>
                     <span>количество</span>
-                    <input type="text">
+                    <input type="number" min="1" max="99" value="1">
                 </div>
-            </div> 
-        </div>
+            </li> 
+        </ul>
+
+
+
+        <button class="submit-btn btn">Продолжить позже</button>
+        <button class="submit-btn">Отправить</button>
+
     </div>
     
     <script src="script.js" type="module"></script>

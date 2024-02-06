@@ -14,6 +14,10 @@ const article = document.querySelector(".article-input")
 const addBtn = document.querySelector(".submit-btn");
 const productList = document.querySelector(".product");
 
+const btn = document.querySelector(".btn");
+
+
+
 
 const product = {
   name:" Test-1",
@@ -26,10 +30,7 @@ const product = {
 
 addBtn.addEventListener("click", () => {
 
-   const data = postData(article.value)
-
-   console.log(data);
-   
+  const data = postData(article.value)
 
   if (data === 5) {
     console.log('ERROR');
@@ -39,13 +40,28 @@ addBtn.addEventListener("click", () => {
     console.log('OK');
 
 
- 
     // product = JSON.parse(data)
     addProductCard(product)
     article.value = " "
 
   }
 
+})
+
+productList.addEventListener("click", function(e) {
+  let targetItem = e.target;
+  if (targetItem.closest('.removeBtn')) {
+    let removeId = targetItem.closest('.removeBtn').id
+
+    removeProductCard(removeId)
+  }
+})
+
+btn.addEventListener("click", () => {
+
+
+  console.log(dataProcessing());
+  
 
 })
 
@@ -53,34 +69,51 @@ addBtn.addEventListener("click", () => {
  function postData(data) {
 
  return  data = Number(data) + 4
-
-
  }
 
-
- function addProductCard(product) { 
-  console.log('addProductCard');
-  
+ function addProductCard(product) {   
 
   const markup = 
 
-          `<div class="product-card">
-            <span>X</span>
-            <h5>${product.name}</h5>
-            <img src="images/images.png" alt="img">
+          `<li class="product-card" id="${article.value}">
+          <span class="removeBtn" id="${article.value}">X</span>
+          <h5>${product.name}</h5>
             <img src="${product.imgURL}" alt="${product.tags}" loading="lazy"/>
-            <p>${product.article}</p>
+            <p> артик:${article.value}</p>
             <div>
                 <span>количество</span>
-                <input type="text">
+                <input type="number" min="1" max="99" value="1">
             </div>
-          </div>`
+          </li>`
 
-  console.log(markup);
-
- 
   productList.insertAdjacentHTML("beforeend", markup);
   }
+
+  function removeProductCard(productId) { 
+    let elem = document.getElementById(`${productId}`);
+    productList.removeChild(elem);
+
+  }
+
+  function dataProcessing() {
+
+    const allProducts = document.querySelectorAll('.product-card')
+    const products = [...allProducts]
+  
+    const productItem = products.map(product => {
+    const quantity =(product.children[4].children[1].value);
+    const article = (product.id);
+  
+  
+    return { 'article': article,
+              'quantity' : quantity}
+  
+  
+    })
+    return productItem
+  }
+
+
 
 
 
