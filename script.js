@@ -10,14 +10,6 @@
 // })
 // }
 
-const article = document.querySelector(".article-input")
-const addBtn = document.querySelector(".submit-btn");
-const productList = document.querySelector(".product");
-
-const btn = document.querySelector(".btn");
-
-
-
 
 const product = {
   name:" Test-1",
@@ -28,9 +20,38 @@ const product = {
 }
 
 
-addBtn.addEventListener("click", () => {
 
+const article = document.querySelector(".article-input")
+const orderNumber = document.querySelector(".order-number")
+
+const addBtn = document.querySelector(".article-btn");
+const orderBtn = document.querySelector(".order-btn");
+
+const btn = document.querySelector(".btn");
+const btn1 = document.querySelector(".btn1");
+
+
+const productList = document.querySelector(".product");
+
+
+orderBtn.addEventListener("click", () => { 
+
+  console.log('orderBtn');
+  
+})
+  
+
+
+
+
+
+addBtn.addEventListener("click", () => {
   const data = postData(article.value)
+
+  if(article.value.length === 0) {
+    
+    return alert("введите артикул")
+  } 
 
   if (data === 5) {
     console.log('ERROR');
@@ -59,8 +80,39 @@ productList.addEventListener("click", function(e) {
 
 btn.addEventListener("click", () => {
 
+  if(!orderNumber.value) {
+    return alert("введите артикул")
 
-  console.log(dataProcessing());
+  }
+
+  const params = {
+    'order number' : orderNumber.value,
+    'status' : 'in progress'
+  }
+
+const productArr = dataProcessing()
+
+productArr.splice(0,0, params)
+
+console.log(productArr);
+
+  
+
+})
+
+btn1.addEventListener("click", () => {
+
+  const params = {
+    'order number' : orderNumber.value,
+    'status' : 'completed'
+  }
+
+const productArr = dataProcessing()
+
+productArr.splice(0,0, params)
+
+console.log(productArr);
+
   
 
 })
