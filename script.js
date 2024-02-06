@@ -1,5 +1,3 @@
-
-
 // function postData(data) {
 // fetch("https://sitniks.ua/mail-send.php", {
 //   "headers": {
@@ -10,19 +8,15 @@
 // })
 // }
 
-
 const product = {
-  name:" Test-1",
+  name: "Test-1",
   imgURL: "images/images.png",
   tags: "img",
-  article: 111111
+  article: '111111'
+};
 
-}
-
-
-
-const article = document.querySelector(".article-input")
-const orderNumber = document.querySelector(".order-number")
+const article = document.querySelector(".article-input");
+const orderNumber = document.querySelector(".order-number");
 
 const addBtn = document.querySelector(".article-btn");
 const orderBtn = document.querySelector(".order-btn");
@@ -30,104 +24,85 @@ const orderBtn = document.querySelector(".order-btn");
 const btn = document.querySelector(".btn");
 const btn1 = document.querySelector(".btn1");
 
-
 const productList = document.querySelector(".product");
 
 
-orderBtn.addEventListener("click", () => { 
-
-  console.log('orderBtn');
-  
-})
-  
 
 
+orderBtn.addEventListener("click", () => {
+
+  console.log("orderBtn");
+
+});
 
 
 
 addBtn.addEventListener("click", () => {
-  const data = postData(article.value)
+  const data = postData(article.value);
 
-  if(article.value.length === 0) {
-    
-    return alert("введите артикул")
-  } 
+  if (article.value.length === 0) {
+    return alert("введите артикул");
+  }
 
   if (data === 5) {
-    console.log('ERROR');
-    
+    console.log("ERROR");
   } else {
-
-    console.log('OK');
-
+    console.log("OK");
 
     // product = JSON.parse(data)
-    addProductCard(product)
-    article.value = " "
-
+    addProductCard(product);
+    article.value = " ";
   }
+});
 
-})
-
-productList.addEventListener("click", function(e) {
+productList.addEventListener("click", function (e) {
+  
   let targetItem = e.target;
-  if (targetItem.closest('.removeBtn')) {
-    let removeId = targetItem.closest('.removeBtn').id
+  if (targetItem.closest(".removeBtn")) {
+    let removeId = targetItem.closest(".removeBtn").id;
 
-    removeProductCard(removeId)
+    removeProductCard(removeId);
   }
-})
+});
+
+
 
 btn.addEventListener("click", () => {
-
-  if(!orderNumber.value) {
-    return alert("введите артикул")
-
+  if (!orderNumber.value) {
+    return alert("введите номер заказа");
   }
 
   const params = {
-    'order number' : orderNumber.value,
-    'status' : 'in progress'
-  }
+    "order number": orderNumber.value,
+    status: "in progress",
+  };
 
-const productArr = dataProcessing()
+  const productArr = dataProcessing();
 
-productArr.splice(0,0, params)
+  productArr.splice(0, 0, params);
 
-console.log(productArr);
-
-  
-
-})
+  console.log(productArr);
+});
 
 btn1.addEventListener("click", () => {
-
   const params = {
-    'order number' : orderNumber.value,
-    'status' : 'completed'
-  }
+    "order number": orderNumber.value,
+    status: "completed",
+  };
 
-const productArr = dataProcessing()
+  const productArr = dataProcessing();
 
-productArr.splice(0,0, params)
+  productArr.splice(0, 0, params);
 
-console.log(productArr);
+  console.log(productArr);
+});
 
-  
+function postData(data) {
+  return (data = Number(data) + 4);
+}
 
-})
-
-
- function postData(data) {
-
- return  data = Number(data) + 4
- }
-
- function addProductCard(product) {   
-
-  const markup = 
-
-          `<li class="product-card" id="${article.value}">
+function addProductCard(product) {
+  const markup = `<li class="product-card" id="${article.value}">
           <span class="removeBtn" id="${article.value}">X</span>
           <h5>${product.name}</h5>
             <img src="${product.imgURL}" alt="${product.tags}" loading="lazy"/>
@@ -136,49 +111,28 @@ console.log(productArr);
                 <span>количество</span>
                 <input type="number" min="1" max="99" value="1">
             </div>
-          </li>`
+          </li>`;
 
   productList.insertAdjacentHTML("beforeend", markup);
-  }
+}
 
-  function removeProductCard(productId) { 
-    let elem = document.getElementById(`${productId}`);
-    productList.removeChild(elem);
+function removeProductCard(productId) {
+  let elem = document.getElementById(`${productId}`);
+  productList.removeChild(elem);
+}
 
-  }
+function dataProcessing() {
+  const allProducts = document.querySelectorAll(".product-card");
+  const products = [...allProducts];
 
-  function dataProcessing() {
+  const productItem = products.map((product) => {
+    const quantity = product.children[4].children[1].value;
+    const article = product.id;
 
-    const allProducts = document.querySelectorAll('.product-card')
-    const products = [...allProducts]
-  
-    const productItem = products.map(product => {
-    const quantity =(product.children[4].children[1].value);
-    const article = (product.id);
-  
-  
-    return { 'article': article,
-              'quantity' : quantity}
-  
-  
-    })
-    return productItem
-  }
-
-
-
-
-
-
-
-
-
- 
-
-
- 
-
-
+    return { article: article, quantity: quantity };
+  });
+  return productItem;
+}
 
 // const userList = document.querySelector(".user-list");
 
